@@ -10,3 +10,17 @@ endif()
 
 add_executable(projekt main.cpp)
 target_link_libraries(projekt ${wxWidgets_LIBRARIES})
+
+IF(WIN32)
+    if(CMAKE_CROSSCOMPILING)
+        file(GLOB MINGW_DLLS "/usr/x86_64-w64-mingw32/bin/*.dll")
+    else()
+        set(MINGW_DLLS "")
+    endif()
+    add_custom_command(TARGET projekt POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${MINGW_DLLS}
+            $<TARGET_FILE_DIR:projekt>
+    )
+    target_sources(projekt PRIVATE resource.rc)
+ENDIF()
