@@ -6,7 +6,7 @@
 #include <wx/dcbuffer.h>
 
 #include "Board.h"
-#include "render/BombermanCanvas.h"
+#include "BombermanGame.h"
 
 /*class BombermanCanvas : public wxPanel {
 public:
@@ -121,8 +121,8 @@ public:
 
         menuPanel->SetSizer(menuOuterSizer);
 
-        gamePanel = new BombermanCanvas(this);
-        gamePanel->SetBoard(&board);
+        gamePanel = new BombermanGame(this, board);
+        // gamePanel->SetBoard(board);
 
         sizer->Add(menuPanel, 1, wxEXPAND);
         sizer->Add(gamePanel, 1, wxEXPAND);
@@ -135,7 +135,7 @@ public:
 
 private:
     wxPanel* menuPanel;
-    BombermanCanvas* gamePanel;
+    BombermanGame* gamePanel;
     Board board;
 
     void OnHello(wxCommandEvent& event);

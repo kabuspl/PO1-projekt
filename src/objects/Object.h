@@ -6,17 +6,18 @@
 #define PROJEKT_OBJECT_H
 #include <wx/graphics.h>
 
+#include "../render/Sprite.h"
 #include "../utils/Vector.h"
 
 class Object {
 public:
     Vector position;
     Vector size;
+    std::string spriteName;
 
-    Object(Vector position, Vector size);
+    Object(Vector position, Vector size, std::string spriteName);
 
     virtual void Tick(double delta);
-    virtual void Render(wxGraphicsContext* gc);
 };
 
 #endif //PROJEKT_OBJECT_H

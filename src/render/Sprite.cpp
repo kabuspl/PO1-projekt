@@ -1,0 +1,24 @@
+//
+// Created by kabus on 8.06.2026.
+//
+
+#include "Sprite.h"
+
+#include <iostream>
+
+Sprite::Sprite(std::string texture_path) {
+    this->bitmap = wxBitmap(texture_path, wxBITMAP_TYPE_PNG);
+}
+
+void Sprite::Draw(wxGraphicsContext* ctx, double x, double y, double w, double h, Transform t) {
+    wxImage img = bitmap.ConvertToImage();
+
+    img = img.Scale(
+        ceil(w * t.scale),
+        ceil(h * t.scale),
+        wxIMAGE_QUALITY_NEAREST
+    );
+
+    wxBitmap scaled(img);
+    ctx->DrawBitmap(scaled, X(x), Y(y), scaled.GetWidth(), scaled.GetHeight());
+}

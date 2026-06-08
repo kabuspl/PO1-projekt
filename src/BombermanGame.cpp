@@ -1,0 +1,48 @@
+//
+// Created by kabus on 29.04.2026.
+//
+
+#include "BombermanGame.h"
+
+#include <wx/dcbuffer.h>
+#include <wx/graphics.h>
+
+#include "Board.h"
+#include "Constants.h"
+
+BombermanGame::BombermanGame(wxWindow *parent, Board& initialBoard) : wxPanel(parent), board(initialBoard), renderer(initialBoard) {
+    Bind(wxEVT_PAINT, &BombermanGame::OnPaint, this);
+    Bind(wxEVT_ERASE_BACKGROUND, [](wxEraseEvent &) {
+    });
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
+
+    drawTimer.Bind(wxEVT_TIMER, &BombermanGame::OnDrawTimer, this);
+    drawTimer.Start(16); // ~60 FPS
+}
+
+void BombermanGame::OnDrawTimer(wxTimerEvent &event) {
+    Refresh(false);
+}
+
+void BombermanGame::OnPaint(wxPaintEvent &event) {
+    wxAutoBufferedPaintDC dc(this);
+    wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
+
+    if(frames_count == 0) Setup(gc);
+
+    renderer.DrawFrame(gc, GetSize());
+
+    delete gc;
+}
+
+void BombermanGame::Setup(wxGraphicsContext* gc) {
+
+
+    wxFont tmpFont16(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+    fontWhite16 = gc->CreateFont(tmpFont16, *wxWHITE);
+}
+
+void BombermanGame::SetBoard(Board& board) {
+    this->board = board;
+    this->renderer.SetBoard(board);
+}

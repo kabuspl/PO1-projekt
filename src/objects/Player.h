@@ -9,8 +9,6 @@
 class Player: public Object {
 public:
     Player();
-
-    void Render(wxGraphicsContext *gc) override;
 };
 
 #endif //PROJEKT_PLAYER_H

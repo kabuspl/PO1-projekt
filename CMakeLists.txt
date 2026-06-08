@@ -19,8 +19,14 @@ add_executable(projekt src/main.cpp
         src/utils/Vector.h
         src/objects/Player.cpp
         src/objects/Player.h
-        src/render/BombermanCanvas.cpp
-        src/render/BombermanCanvas.h
+        src/BombermanGame.cpp
+        src/BombermanGame.h
+        src/render/Renderer.cpp
+        src/render/Renderer.h
+        src/render/Sprite.cpp
+        src/render/Sprite.h
+        src/render/Transform.h
+        src/Constants.h
 )
 target_link_libraries(projekt ${wxWidgets_LIBRARIES})
 
@@ -37,3 +43,8 @@ IF(WIN32)
     )
     target_sources(projekt PRIVATE resource.rc)
 ENDIF()
+
+add_custom_command(TARGET projekt POST_BUILD
+    COMMAND ${CMAKE_COMMAND}
+    ARGS -E copy_directory_if_different "${PROJECT_SOURCE_DIR}/assets" "$<TARGET_FILE_DIR:projekt>/assets"
+)

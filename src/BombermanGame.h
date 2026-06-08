@@ -7,28 +7,27 @@
 #include <wx/graphics.h>
 #include <wx/wx.h>
 
-#define TILE_SIZE 32.0
+#include "render/Renderer.h"
 
 class Board;
 
-class BombermanCanvas: public wxPanel {
+class BombermanGame: public wxPanel {
 public:
-    BombermanCanvas(wxWindow* parent);
+    BombermanGame(wxWindow* parent, Board& initialBoard);
 
-    void SetBoard(Board* board);
+    void SetBoard(Board& board);
 
 private:
     wxTimer drawTimer;
     wxGraphicsFont fontWhite16;
     int frames_count = 0;
-    Board* board;
+    Board& board;
+    Renderer renderer;
 
     void OnDrawTimer(wxTimerEvent& event);
     void OnPaint(wxPaintEvent& event);
 
     void Setup(wxGraphicsContext* gc);
-    void DrawBoard(wxGraphicsContext* gc);
-    void DrawObjects(wxGraphicsContext* gc);
 };
 
 #endif //PROJEKT_BOMBERMANCANVAS_H

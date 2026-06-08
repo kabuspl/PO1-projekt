@@ -4,12 +4,8 @@
 
 #include "Player.h"
 
-#include "../render/BombermanCanvas.h"
+#include "../BombermanGame.h"
+#include "../Constants.h"
 
-Player::Player() : Object(Vector(32.0, 32.0), Vector(TILE_SIZE, TILE_SIZE)) {
-}
-
-void Player::Render(wxGraphicsContext *gc) {
-    gc->SetBrush(*wxYELLOW_BRUSH);
-    gc->DrawEllipse(position.x, position.y, size.x, size.y);
+Player::Player() : Object(Vector(32.0, 32.0), Vector(TILE_SIZE, TILE_SIZE), "player") {
 }

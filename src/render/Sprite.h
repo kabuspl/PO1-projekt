@@ -1,0 +1,22 @@
+//
+// Created by kabus on 8.06.2026.
+//
+
+#ifndef PROJEKT_SPRITE_H
+#define PROJEKT_SPRITE_H
+#include <wx/bitmap.h>
+#include <wx/graphics.h>
+
+#include "Transform.h"
+
+class Sprite {
+    wxBitmap bitmap;
+
+public:
+    Sprite(std::string texture_path);
+    void Draw(wxGraphicsContext* ctx, double x, double y, double w, double h, Transform t);
+};
+
+
+
+#endif //PROJEKT_SPRITE_H
