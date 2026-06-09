@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
+#include <wx/clrpicker.h>
 
 #include "Board.h"
 #include "BombermanGame.h"
@@ -88,6 +89,12 @@ public:
         wxStaticText *title = new wxStaticText(menuPanel, wxID_ANY, "BomberMan");
         title->SetFont(GetFont().Scale(3.0));
         menuSizer->Add(title, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+        wxBoxSizer* colorPickerSizer = new wxBoxSizer(wxHORIZONTAL);
+        auto colorPickerLabel = new wxStaticText(menuPanel, wxID_ANY, "Kolor postaci: ");
+        colorPickerSizer->Add(colorPickerLabel, 0, wxALIGN_CENTER, 10);
+        characterColorPicker = new wxColourPickerCtrl(menuPanel, wxID_ANY);
+        colorPickerSizer->Add(characterColorPicker, 1, 0, 10);
+        menuSizer->Add(colorPickerSizer, 0, wxEXPAND | wxBOTTOM, 10);
         wxButton *newGameButton = new wxButton(
             menuPanel, // parent (the panel!)
             wxID_ANY, // ID
@@ -139,6 +146,7 @@ private:
     wxPanel* menuPanel;
     BombermanGame* gamePanel;
     Board board;
+    wxColourPickerCtrl* characterColorPicker;
 
     void OnHello(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event) {
@@ -149,6 +157,7 @@ private:
              "About Hello World", wxOK | wxICON_INFORMATION);
     }
     void OnNewGame(wxCommandEvent &event) {
+        gamePanel->SetPlayerColor(characterColorPicker->GetColour());
         menuPanel->Hide();
         gamePanel->Show();
         gamePanel->SetFocus();
