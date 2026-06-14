@@ -70,8 +70,6 @@ void Board::SpawnEnemies() {
 
 }
 
-bool Board::CheckCollisions(Object &object, std::list<Object*>* collidesWith) {
-    bool out = false;
 TileType Board::CheckCollisions(Object &object, std::vector<Object*>* collidesWith) {
     TileType out = TileType::Empty;
 
