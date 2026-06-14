@@ -239,6 +239,7 @@ private:
         gamePanel->SetPlayerColor(characterColorPicker->GetColour());
         menuPanel->Hide();
         gamePanel->Show();
+        aboutPanel -> Hide();
         gamePanel->SetFocus();
         board.Reset();
         GetSizer()->Layout();
