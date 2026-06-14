@@ -19,6 +19,8 @@ add_executable(projekt src/main.cpp
         src/utils/Vector.h
         src/objects/Player.cpp
         src/objects/Player.h
+        src/objects/Enemy.cpp
+        src/objects/Enemy.h
         src/BombermanGame.cpp
         src/BombermanGame.h
         src/render/Renderer.cpp
@@ -31,6 +33,12 @@ add_executable(projekt src/main.cpp
         src/objects/Bomb.h
         src/objects/BombExplosion.cpp
         src/objects/BombExplosion.h
+        src/pages/MainMenuPage.cpp
+        src/pages/MainMenuPage.h
+        src/pages/AboutPage.cpp
+        src/pages/AboutPage.h
+        src/pages/GamePage.cpp
+        src/pages/GamePage.h
 )
 target_link_libraries(projekt ${wxWidgets_LIBRARIES})
 
