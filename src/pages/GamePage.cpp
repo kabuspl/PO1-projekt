@@ -19,6 +19,16 @@ GamePage::GamePage(wxWindow *parent) : wxPanel(parent), board(21, 11) {
     lives = new HudDisplay(this, wxT("Życia"), "3");
     hudSizer->Add(lives, 1);
 
+    board.onScoreChanged = [this](int score) {
+        this->score->SetValue(wxString::Format("%d", score));
+    };
+    board.onLivesChanged = [this](int lives) {
+        this->lives->SetValue(wxString::Format("%d", lives));
+    };
+    board.onTimeChanged = [this](int time) {
+        this->timeLeft->SetValue(wxString::Format("%d:%02d", time/60, time%60));
+    };
+
     gamePanel = new BombermanGame(this, board);
     gameSizer->Add(gamePanel, 1, wxEXPAND);
     gamePanel->Bind(wxEVT_KEY_DOWN, &GamePage::OnKeyDown, this);

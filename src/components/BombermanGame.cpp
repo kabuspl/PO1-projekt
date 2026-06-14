@@ -33,6 +33,8 @@ void BombermanGame::Tick() {
         ),
         board.objects.end()
     );
+    board.timeLeftTicks--;
+    board.onTimeChanged(board.timeLeftTicks / 60);
 }
 
 void BombermanGame::OnDrawTimer(wxTimerEvent &event) {

@@ -24,6 +24,9 @@ void Board::Reset() {
     tiles.resize(height);
     objects.clear();
     objects.push_back(new Player(*this));
+    score = 0;
+    timeLeftTicks = 180 * 60;
+    lives = 3;
     GenerateBoard();
     SpawnEnemies();
 }

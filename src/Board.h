@@ -14,7 +14,13 @@ public:
     std::vector<std::vector<Tile>> tiles;
     std::vector<Object*> objects;
 
+    std::function<void(int)> onScoreChanged;
+    std::function<void(int)> onLivesChanged;
+    std::function<void(int)> onTimeChanged;
+
     int width, height;
+
+    int score, timeLeftTicks, lives;
 
     Board(int width, int height);
 
