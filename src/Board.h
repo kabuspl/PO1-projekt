@@ -23,7 +23,9 @@ public:
     bool CheckCollisions(Object &object);
 
 private:
+
     void GenerateBoard();
+    void SpawnEnemies();
 };
 
 #endif //PROJEKT_BOARD_H
