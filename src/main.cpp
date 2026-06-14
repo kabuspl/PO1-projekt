@@ -71,8 +71,8 @@ public:
         wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
         wxMenu *menuGame = new wxMenu;
-        menuGame->Append(ID_NewGame, "Nowa gra");
-        Bind(wxEVT_MENU, &BombermanFrame::OnNewGame, this, ID_NewGame);
+        menuGame->Append(ID_NewGame, wxString::FromUTF8("Menu główne"));
+        Bind(wxEVT_MENU, &BombermanFrame::OnMainMenu, this, ID_NewGame);
         menuGame->Append(ID_FullScreen, wxString::FromUTF8("Pełny ekran\tF11"), "", true);
         Bind(wxEVT_MENU, &BombermanFrame::OnToggleFullscreen, this, ID_FullScreen);
 
@@ -125,6 +125,11 @@ private:
         aboutPanel -> Show();
         this->Layout();
         //wxMessageBox("Autorzy \n Jakub Sakra \n Igor Lachowski \n Adrian Kisielewski \n Kacper 'Kykol' Kotulski", "About Us", wxOK | wxICON_INFORMATION);
+    }
+    void OnMainMenu(wxCommandEvent& event) {
+        gamePanel->Hide();
+        aboutPanel->Hide();
+        menuPanel->Show();
     }
     void OnNewGame(wxCommandEvent &event) {
         // gamePanel->SetPlayerColor(event.GetInt());
