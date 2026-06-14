@@ -9,6 +9,7 @@
 #include <list>
 
 #include "Constants.h"
+#include "objects/Enemy.h"
 #include "objects/Player.h"
 
 Board::Board(int width, int height) {
@@ -24,6 +25,7 @@ void Board::Reset() {
     objects.clear();
     objects.push_back(new Player(*this));
     GenerateBoard();
+    SpawnEnemies();
 }
 
 void Board::GenerateBoard() {
@@ -48,6 +50,28 @@ void Board::GenerateBoard() {
     }
 }
 
+void Board::SpawnEnemies() {
+    int enemycount = 4;
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> rand(1,10);
+    do {
+        for(int row = 0; row < height; row++) {
+            for(int col = 0; col < width; col++) {
+                if(row == 1 && col < 6 || col == 1 && row < 6) continue;
+                if (tiles[row][col].type == TileType::Empty && enemycount > 0 && rand(rng) == 1) {
+                    objects.push_back(new Enemy(*this,Vector(TILE_SIZE*col,TILE_SIZE*row)));
+                    enemycount--;
+                }
+            }
+        }
+    }while (enemycount > 0);
+
+
+}
+
+bool Board::CheckCollisions(Object &object, std::list<Object*>* collidesWith) {
+    bool out = false;
 TileType Board::CheckCollisions(Object &object, std::vector<Object*>* collidesWith) {
     TileType out = TileType::Empty;
 
