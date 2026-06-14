@@ -7,7 +7,7 @@
 #include <wx/clrpicker.h>
 
 #include "Board.h"
-#include "BombermanGame.h"
+#include "components/BombermanGame.h"
 #include "pages/AboutPage.h"
 #include "pages/GamePage.h"
 #include "pages/MainMenuPage.h"

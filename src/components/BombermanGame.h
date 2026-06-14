@@ -8,7 +8,7 @@
 #include <wx/wx.h>
 #include <set>
 
-#include "render/Renderer.h"
+#include "../render/Renderer.h"
 
 class Board;
 

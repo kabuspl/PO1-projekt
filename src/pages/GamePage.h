@@ -6,12 +6,16 @@
 #define PROJEKT_GAMEPAGE_H
 
 #include <wx/wx.h>
-#include "../BombermanGame.h"
+#include "../components/BombermanGame.h"
+#include "../components/HudDisplay.h"
 
 class GamePage : public wxPanel {
 private:
     BombermanGame* gamePanel;
     Board board;
+    HudDisplay* score;
+    HudDisplay* timeLeft;
+    HudDisplay* lives;
 
     void OnKeyDown(wxKeyEvent& event);
     void OnKeyUp(wxKeyEvent& event);
