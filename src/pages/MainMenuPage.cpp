@@ -21,6 +21,7 @@ MainMenuPage::MainMenuPage(wxWindow *parent) : wxPanel(parent) {
     auto colorPickerLabel = new wxStaticText(this, wxID_ANY, "Kolor postaci: ");
     colorPickerSizer->Add(colorPickerLabel, 0, wxALIGN_CENTER, 10);
     characterColorPicker = new wxColourPickerCtrl(this, wxID_ANY);
+    characterColorPicker->SetColour(wxColour(200, 200, 200));
     colorPickerSizer->Add(characterColorPicker, 1, 0, 10);
     menuSizer->Add(colorPickerSizer, 0, wxEXPAND | wxBOTTOM, 10);
     wxButton *newGameButton = new wxButton(
