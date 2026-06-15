@@ -17,12 +17,14 @@ void Player::Tick(std::set<char> pressedKeys) {
     HandleMovement(pressedKeys, 'A', position.x, position.y, -1);
     HandleMovement(pressedKeys, 'D', position.x, position.y, 1);
 
-    if(pressedKeys.contains(' ') && !spawned) {
-        board.objects.push_back(new Bomb(board, position));
-        spawned = true;
+    int bombCount = 0;
+    for (auto obj : board.objects) {
+        if (dynamic_cast<Bomb*>(obj) != nullptr) {
+            bombCount++;
+        }
     }
-    if(!pressedKeys.contains(' ')) {
-        spawned = false;
+    if(pressedKeys.contains(' ') && bombCount == 0) {
+        board.objects.push_back(new Bomb(board, position));
     }
 }
 
