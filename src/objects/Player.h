@@ -9,6 +9,8 @@
 class Player: public Object {
     bool spawned = false;
 
+    void HandleMovement(std::set<char> pressedKeys, char key, double& moveAxis, double& offsetAxis, int moveDir);
+
 public:
     Player(Board& board);
 
