@@ -32,6 +32,7 @@ public:
     void Respawn();
     void Pause();
     void Unpause();
+    int CheckLvl();
     bool CheckPause();
     TileType CheckCollisions(Object &object, std::vector<Object*>* collidesWith);
     TileType CheckCollisions(Object &object);
