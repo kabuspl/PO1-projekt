@@ -26,6 +26,8 @@ private:
     wxTimer drawTimer;
     wxGraphicsFont fontWhite16;
     int frames_count = 0;
+    int pause_delay = 0;
+    bool is_paused = false;
     Board& board;
     Renderer renderer;
     std::set<char> pressedKeys;

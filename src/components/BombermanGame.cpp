@@ -38,7 +38,9 @@ void BombermanGame::Tick() {
 }
 
 void BombermanGame::OnDrawTimer(wxTimerEvent &event) {
-    Tick();
+    if (pressedKeys.contains('P') && pause_delay <=0){ is_paused=!is_paused; pause_delay = 20;}
+    if (!is_paused) Tick();
+    pause_delay--;
     Refresh(false);
 }
 
