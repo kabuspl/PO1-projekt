@@ -36,6 +36,11 @@ void BombermanGame::Tick() {
     board.timeLeftTicks--;
     board.onTimeChanged(board.timeLeftTicks / 60);
 
+    if (board.timeLeftTicks <=0) {
+        board.showOverlay(wxT("Przegrana"),wxT("Skończył ci się czas"),wxT("Powrót do menu"),this->board.onMainMenu,wxT("Spróbuj ponownie"),[this]{board.Respawn();board.Unpause();});
+        board.Pause();
+    }
+
     if(pressedKeys.contains(']')) {
         for (Object* obj : board.objects) {
             if (dynamic_cast<Enemy*>(obj) != nullptr) {
@@ -54,8 +59,8 @@ void BombermanGame::Tick() {
         }
     }
     if (enemyCount==0) {
-        board.showOverlay(wxT("Zwycięstwo"),"",wxT("Powrót do menu"),this->board.onMainMenu,wxT("Następny poziom"),[this]{board.NextLvl();is_paused = false;});
-        is_paused = true;
+        board.showOverlay(wxT("Zwycięstwo"),"",wxT("Powrót do menu"),this->board.onMainMenu,wxT("Następny poziom"),[this]{board.NextLvl();board.Unpause();});
+        board.Pause();
     }
 
 }
