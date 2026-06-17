@@ -28,6 +28,7 @@ GamePage::GamePage(wxWindow* parent) : wxPanel(parent), board(21, 11) {
         this->timeLeft->SetValue(
             wxString::Format("%d:%02d", board.timeLeftTicks / 60 / 60, board.timeLeftTicks / 60 % 60));
         this->lives->SetValue(wxString::Format("%d", board.lives));
+        this->Layout();
     };
     board.showOverlay = [this](wxString title, wxString description, wxString leftButtonText,
                                std::function<void()> leftButtonAction, wxString rightButtonText,
