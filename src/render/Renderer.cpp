@@ -82,5 +82,6 @@ void Renderer::DrawBoard(wxGraphicsContext* ctx, Transform& t) {
 }
 
 void Renderer::SetPlayerColor(wxColour color) {
+    delete sprites.at("player");
     sprites.insert_or_assign("player", new AnimatedSprite("assets/textures/player.png", 16, 15, color));
 }

@@ -19,6 +19,9 @@ Board::Board(int width, int height) {
 void Board::Reset() {
     tiles.clear();
     tiles.resize(height);
+    for(auto object : objects) {
+        delete object;
+    }
     objects.clear();
     objects.push_back(new Player(*this));
     timeLeftTicks = 180 * 60;
@@ -185,9 +188,11 @@ TileType Board::CheckCollisions(Object& object, std::vector<Object*>* collidesWi
 }
 
 TileType Board::CheckCollisions(Object& object) {
-    return CheckCollisions(object, new std::vector<Object*>());
+    std::vector<Object*> tmp;
+    return CheckCollisions(object, &tmp);
 }
 
 bool Board::CheckCollisionsSimple(Object& object) {
+    std::vector<Object*> tmp;
     return CheckCollisions(object, new std::vector<Object*>()) != TileType::Empty;
 }
