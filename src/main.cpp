@@ -16,7 +16,7 @@ enum {
 
 class BombermanFrame : public wxFrame {
 public:
-    BombermanFrame() : wxFrame(NULL, wxID_ANY, "Bomberman", wxDefaultPosition, wxSize(800, 600)), board(21, 11) {
+    BombermanFrame() : wxFrame(NULL, wxID_ANY, "Bomberman", wxDefaultPosition, wxSize(1000, 600)), board(21, 11) {
         wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
         wxMenu* menuGame = new wxMenu;
