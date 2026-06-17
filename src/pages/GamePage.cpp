@@ -1,6 +1,7 @@
 #include "GamePage.h"
 
 #include "../components/HudDisplay.h"
+#include <wx/wx.h>
 
 wxDEFINE_EVENT(GAME_MENU, wxCommandEvent);
 
@@ -68,10 +69,10 @@ GamePage::GamePage(wxWindow* parent) : wxPanel(parent), board(21, 11) {
     overlaySizer->Add(overlayButtonSizer, 0, wxALIGN_CENTER);
     overlayButtonLeft = new wxButton(overlay, wxID_ANY, "Chuj");
     overlayButtonLeft->Bind(wxEVT_BUTTON, &GamePage::OnOverlayLeftButtonPressed, this);
-    overlayButtonSizer->Add(overlayButtonLeft, 1, wxRIGHT, 10);
+    overlayButtonSizer->Add(overlayButtonLeft, 1, wxRIGHT | wxEXPAND, 10);
     overlayButtonRight = new wxButton(overlay, wxID_ANY, "Dupa");
     overlayButtonRight->Bind(wxEVT_BUTTON, &GamePage::OnOverlayRightButtonPressed, this);
-    overlayButtonSizer->Add(overlayButtonRight, 1);
+    overlayButtonSizer->Add(overlayButtonRight, 1, wxEXPAND);
 }
 
 void GamePage::ShowOverlay(wxString title, wxString description, wxString leftButtonText,
