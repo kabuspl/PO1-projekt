@@ -84,6 +84,7 @@ void GamePage::ShowOverlay(wxString title, wxString description, wxString leftBu
     overlayLeftButtonAction = leftButtonAction;
     overlayRightButtonAction = rightButtonAction;
     overlay->Show();
+    overlay->Layout();
 }
 
 void GamePage::HideOverlay() {
