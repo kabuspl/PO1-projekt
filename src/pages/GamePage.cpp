@@ -91,6 +91,7 @@ void GamePage::ShowOverlay(wxString title, wxString description, wxString leftBu
 
 void GamePage::HideOverlay() {
     overlay->Hide();
+    gamePanel->SetFocusFromKbd();
 }
 
 void GamePage::OnOverlayLeftButtonPressed(wxCommandEvent& event) {
@@ -119,6 +120,7 @@ void GamePage::OnKeyUp(wxKeyEvent& event) {
 
 void GamePage::Reset() {
     gamePanel->ResetBoard();
+    gamePanel->SetFocusFromKbd();
 }
 
 void GamePage::SetPlayerColor(wxColour color) {
