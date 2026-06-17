@@ -4,6 +4,8 @@
 #include "../Constants.h"
 #include "BombExplosion.h"
 
+#include "Player.h"
+
 Bomb::Bomb(Board& board, Vector position) : Object(position, Vector(TILE_SIZE, TILE_SIZE), "bomb", board) {
     this->position = Vector((int)(position.x + TILE_SIZE / 2.0) / (int)TILE_SIZE * TILE_SIZE,
                             (int)(position.y + TILE_SIZE / 2.0) / (int)TILE_SIZE * TILE_SIZE);
@@ -11,6 +13,20 @@ Bomb::Bomb(Board& board, Vector position) : Object(position, Vector(TILE_SIZE, T
 
 void Bomb::Tick(std::set<char> pressedKeys) {
     ticks++;
+
+    if(!isSolid) {
+        bool playerInside = false;
+        for(auto obj : board.objects) {
+            if(auto player = dynamic_cast<Player*>(obj)) {
+                if(!(player->position.x >= position.x + size.x || player->position.x + player->size.x <= position.x ||
+                     player->position.y >= position.y + size.y || player->position.y + player->size.y <= position.y)) {
+                    playerInside = true;
+                    break;
+                }
+            }
+        }
+        if(!playerInside) isSolid = true;
+    }
 
     if(ticks >= 180) {
         board.objects.push_back(new BombExplosion(board, position));

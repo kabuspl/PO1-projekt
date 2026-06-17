@@ -4,6 +4,7 @@
 
 class Player : public Object {
     void HandleMovement(std::set<char> pressedKeys, char key, double& moveAxis, double& offsetAxis, int moveDir);
+    bool IsColliding();
 
 public:
     Player(Board& board);

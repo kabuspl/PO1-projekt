@@ -24,21 +24,34 @@ void Player::Tick(std::set<char> pressedKeys) {
     }
 }
 
+bool Player::IsColliding() {
+    std::vector<Object*> collidesWith;
+    if(board.CheckCollisions(*this, &collidesWith) != TileType::Empty) return true;
+
+    for(auto obj : collidesWith) {
+        Bomb* bomb = dynamic_cast<Bomb*>(obj);
+        if(bomb != nullptr && bomb->isSolid) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Player::HandleMovement(std::set<char> pressedKeys, char key, double& moveAxis, double& offsetAxis, int moveDir) {
     if(pressedKeys.contains(key)) {
         moveAxis += moveDir * 3;
-        if(board.CheckCollisionsSimple(*this)) {
+        if(IsColliding()) {
             float oldOffset = offsetAxis;
             for(int offset = -8; offset < 8; offset++) {
                 offsetAxis = oldOffset + offset;
-                if(!board.CheckCollisionsSimple(*this)) {
+                if(!IsColliding()) {
                     oldOffset = offsetAxis;
                     break;
                 }
             }
             offsetAxis = oldOffset;
         }
-        while(board.CheckCollisionsSimple(*this)) {
+        while(IsColliding()) {
             moveAxis -= moveDir;
         }
     }

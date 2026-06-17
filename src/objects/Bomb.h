@@ -7,6 +7,7 @@ private:
     int ticks = 0;
 
 public:
+    bool isSolid = false;
     Bomb(Board& board, Vector position);
 
     void Tick(std::set<char> pressedKeys) override;
