@@ -5,6 +5,7 @@
 #include "../Constants.h"
 #include "../components/BombermanGame.h"
 #include "Bomb.h"
+#include "Player.h"
 
 Enemy::Enemy(Board& board, Vector position) : Object(position, Vector(TILE_SIZE, TILE_SIZE), "enemy", board) {
     DetermineDirection();
@@ -30,6 +31,14 @@ void Enemy::Tick(std::set<char> pressedKeys) {
     std::random_device dev;
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> rand(1, 500);
+
+    std::vector<Object*> collidesWith;
+    board.CheckCollisions(*this, &collidesWith);
+    // if collision with player
+    if(std::any_of(collidesWith.begin(), collidesWith.end(),
+                   [](Object* obj) { return dynamic_cast<Player*>(obj) != nullptr; })) {
+        board.Respawn();
+    }
 
     auto collidesWithBomb = [&]() -> bool {
         std::vector<Object*> tmp;

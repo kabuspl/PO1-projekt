@@ -3,6 +3,7 @@
 #include "../Board.h"
 #include "../Constants.h"
 #include "Enemy.h"
+#include "Player.h"
 
 BombExplosion::BombExplosion(Board& board, Vector position)
     : Object(position, Vector(TILE_SIZE, TILE_SIZE), "explosion", board) {
@@ -25,6 +26,9 @@ void BombExplosion::Tick(std::set<char> pressedKeys) {
                 obj->flagDelete = true;
                 board.score += 10;
                 board.updateHud();
+            }
+            if(dynamic_cast<Player*>(obj) != nullptr) {
+                board.Respawn();
             }
         }
     }
