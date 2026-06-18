@@ -1,5 +1,6 @@
 #include "Enemy.h"
 
+#include <iostream>
 #include <random>
 
 #include "../Constants.h"
@@ -44,24 +45,34 @@ void Enemy::Tick(std::set<char> pressedKeys) {
         return std::any_of(tmp.begin(), tmp.end(), [](Object* obj) { return dynamic_cast<Bomb*>(obj) != nullptr; });
     };
 
+    if(stayStillTicks > 0) {
+        stayStillTicks--;
+        return;
+    }
+
     int random = rand(rng);
     if(random == 1) direction = !direction;
+    if(random % 200 == 1) stayStillTicks += random % 120;
 
     if(rotation) {
         int old = position.y;
+
         if(direction) {
             position.y += 1;
-        } else
+        } else {
             position.y -= 1;
+        }
+
         if(board.CheckCollisionsSimple(*this) || collidesWithBomb()) {
             position.y = old;
-            switch(random % 3) {
+            switch(random % 4) {
                 case 0: direction = !direction; break;
                 case 1: rotation = !rotation; break;
                 case 2:
                     rotation = !rotation;
                     direction = !direction;
                     break;
+                case 3: stayStillTicks += random % 120; break;
             }
         }
 
@@ -83,17 +94,20 @@ void Enemy::Tick(std::set<char> pressedKeys) {
 
         if(direction) {
             position.x += 1;
-        } else
+        } else {
             position.x -= 1;
+        }
+
         if(board.CheckCollisionsSimple(*this) || collidesWithBomb()) {
             position.x = old;
-            switch(random % 3) {
-                case 1: direction = !direction; break;
-                case 2: rotation = !rotation; break;
-                case 3:
+            switch(random % 4) {
+                case 0: direction = !direction; break;
+                case 1: rotation = !rotation; break;
+                case 2:
                     rotation = !rotation;
                     direction = !direction;
                     break;
+                case 3: stayStillTicks += random % 60; break;
             }
         }
         old = position.y;

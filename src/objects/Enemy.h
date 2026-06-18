@@ -9,6 +9,7 @@ public:
 
 private:
     static std::mt19937 rng;
+    int stayStillTicks = 0;
     bool rotation;
     bool direction;
     void DetermineDirection();
