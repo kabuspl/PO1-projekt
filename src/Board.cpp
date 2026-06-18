@@ -185,5 +185,5 @@ TileType Board::CheckCollisions(Object& object) {
 
 bool Board::CheckCollisionsSimple(Object& object) {
     std::vector<Object*> tmp;
-    return CheckCollisions(object, new std::vector<Object*>()) != TileType::Empty;
+    return CheckCollisions(object, &tmp) != TileType::Empty;
 }
