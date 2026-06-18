@@ -1,4 +1,5 @@
 #include "AboutPage.h"
+#include <wx/wx.h>
 
 wxDEFINE_EVENT(ABOUT_BACK, wxCommandEvent);
 
@@ -17,55 +18,67 @@ AboutPage::AboutPage(wxWindow* parent) : wxPanel(parent) {
     wxGridSizer* aboutContentSizer = new wxGridSizer(2, 2, 20, 20);
     aboutSizer->Add(aboutContentSizer, 0, wxALIGN_CENTER);
 
-    wxBoxSizer* Driansizer = new wxBoxSizer(wxVERTICAL);
-    Driansizer->SetMinSize(160, 100);
-    aboutContentSizer->Add(Driansizer, 0, wxALIGN_CENTER);
+    wxBoxSizer* author1Sizer = new wxBoxSizer(wxVERTICAL);
+    author1Sizer->SetMinSize(160, 100);
+    aboutContentSizer->Add(author1Sizer, 0, wxALIGN_CENTER);
 
-    wxBoxSizer* Kejbasizer = new wxBoxSizer(wxVERTICAL);
-    Kejbasizer->SetMinSize(160, 100);
-    aboutContentSizer->Add(Kejbasizer, 0, wxALIGN_CENTER);
+    wxBoxSizer* author2Sizer = new wxBoxSizer(wxVERTICAL);
+    author2Sizer->SetMinSize(160, 100);
+    aboutContentSizer->Add(author2Sizer, 0, wxALIGN_CENTER);
 
-    wxBoxSizer* Igorsizer = new wxBoxSizer(wxVERTICAL);
-    Igorsizer->SetMinSize(160, 100);
-    aboutContentSizer->Add(Igorsizer, 0, wxALIGN_CENTER);
+    wxBoxSizer* author3Sizer = new wxBoxSizer(wxVERTICAL);
+    author3Sizer->SetMinSize(160, 100);
+    aboutContentSizer->Add(author3Sizer, 0, wxALIGN_CENTER);
 
-    wxBoxSizer* Kykolsizer = new wxBoxSizer(wxVERTICAL);
-    Kykolsizer->SetMinSize(160, 100);
-    aboutContentSizer->Add(Kykolsizer, 0, wxALIGN_CENTER);
+    wxBoxSizer* author4Sizer = new wxBoxSizer(wxVERTICAL);
+    author4Sizer->SetMinSize(160, 100);
+    aboutContentSizer->Add(author4Sizer, 0, wxALIGN_CENTER);
 
-    wxStaticText* Drian = new wxStaticText(this, wxID_ANY, "Drian");
-    wxStaticText* Driantext = new wxStaticText(this, wxID_ANY, "No jestem gejem yyy monster hunter");
-    Drian->SetFont(GetFont().Scale(2.0));
-    Driansizer->Add(Drian, 0, wxALIGN_CENTER | wxBOTTOM, 10);
-    Driansizer->Add(Driantext, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    wxStaticText* author1Name = new wxStaticText(this, wxID_ANY, "Adrian Kisielewski");
+    wxStaticText* author1Text = new wxStaticText(this, wxID_ANY,
+                                                 wxT("Wielki fan Warframe i serii Monster Hunter. Lubię słuchać rocka "
+                                                     "z lat 80 i zajmować się zwierzętami hodowlanymi."),
+                                                 wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    author1Name->SetFont(GetFont().Scale(2.0));
+    author1Text->Wrap(300);
+    author1Sizer->Add(author1Name, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    author1Sizer->Add(author1Text, 0, wxEXPAND, 10);
 
-    wxStaticText* Kejbas = new wxStaticText(this, wxID_ANY, "Kejbas");
-    wxStaticText* Kejbastext = new wxStaticText(this, wxID_ANY, "No jestem gejem yyy grzybie jebany");
-    Kejbas->SetFont(GetFont().Scale(2.0));
-    Kejbasizer->Add(Kejbas, 0, wxALIGN_CENTER | wxBOTTOM, 10);
-    Kejbasizer->Add(Kejbastext, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    wxStaticText* author2Name = new wxStaticText(this, wxID_ANY, "Jakub Sakra");
+    wxStaticText* author2Text = new wxStaticText(this, wxID_ANY,
+                                                 wxT("Lubię grać w gry komputerowe. Nie wiem co więcej tu o sobię "
+                                                     "napisać. Chodzę na Politechnikę Świętokszyską"),
+                                                 wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    author2Name->SetFont(GetFont().Scale(2.0));
+    author2Text->Wrap(300);
+    author2Sizer->Add(author2Name, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    author2Sizer->Add(author2Text, 0, wxEXPAND, 10);
 
-    wxStaticText* Igor = new wxStaticText(this, wxID_ANY, "Igor");
-    wxStaticText* Igortext = new wxStaticText(this, wxID_ANY, "No jestem heteroseksualista yyy world of goo");
-    Igor->SetFont(GetFont().Scale(2.0));
-    Igorsizer->Add(Igor, 0, wxALIGN_CENTER | wxBOTTOM, 10);
-    Igorsizer->Add(Igortext, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    wxStaticText* author3Name = new wxStaticText(this, wxID_ANY, "Igor Lachowski");
+    wxStaticText* author3Text = new wxStaticText(this, wxID_ANY,
+                                                 wxT("Jeżeli chodzi o gry, to preferuję starsze tytuły z naciskiem na "
+                                                     "fabułę. W wolnym czasie lubię czytać książki i słuchać muzykę."),
+                                                 wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    author3Name->SetFont(GetFont().Scale(2.0));
+    author3Text->Wrap(300);
+    author3Sizer->Add(author3Name, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    author3Sizer->Add(author3Text, 0, wxEXPAND, 10);
 
-    wxStaticText* Kykol = new wxStaticText(this, wxID_ANY, "Kykol");
-    wxStaticText* Kykoltext = new wxStaticText(this, wxID_ANY, "No jestem gejem yyy i pedalem tez");
-    Kykol->SetFont(GetFont().Scale(2.0));
-    Kykolsizer->Add(Kykol, 0, wxALIGN_CENTER | wxBOTTOM, 10);
-    Kykolsizer->Add(Kykoltext, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    wxStaticText* author4Name = new wxStaticText(this, wxID_ANY, "Kacper Kotulski");
+    wxStaticText* author4Text =
+        new wxStaticText(this, wxID_ANY,
+                         wxT("20 lat, w wolnym czasie zajmuje się robieniem renderów 3d oraz graniem w karty. Lubię "
+                             "grywać w gry na komputerze oraz oglądać filmy"),
+                         wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    author4Name->SetFont(GetFont().Scale(2.0));
+    author4Text->Wrap(300);
+    author4Sizer->Add(author4Name, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    author4Sizer->Add(author4Text, 0, wxEXPAND, 10);
 
-    wxButton* aboutReturnButton = new wxButton(this,            // parent (the panel!)
-                                               wxID_ANY,        // ID
-                                               "Powrot",        // label
-                                               wxPoint(10, 10), // position
-                                               wxSize(100, 30)  // size
-    );
+    wxButton* aboutReturnButton = new wxButton(this, wxID_ANY, wxT("Powrót"), wxPoint(10, 10), wxSize(100, 30));
 
     aboutReturnButton->Bind(wxEVT_BUTTON, &AboutPage::OnBack, this);
-    aboutSizer->Add(aboutReturnButton, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+    aboutSizer->Add(aboutReturnButton, 0, wxALIGN_CENTER | wxTOP, 20);
 }
 
 void AboutPage::OnBack(wxCommandEvent& evt) {
