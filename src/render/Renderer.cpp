@@ -25,7 +25,6 @@ Sprite* Renderer::GetSprite(std::string name) {
 }
 
 void Renderer::DrawFrame(wxGraphicsContext* ctx, wxSize canvasSize) {
-    frames++;
     Transform t{};
     t.scale = fmin(static_cast<double>(canvasSize.GetWidth()) / (board.width * TILE_SIZE),
                    (canvasSize.GetHeight()) / (board.height * TILE_SIZE));
@@ -46,7 +45,7 @@ void Renderer::DrawObjects(wxGraphicsContext* ctx, Transform& t) {
             sprite = GetSprite("error");
         }
 
-        sprite->Draw(ctx, object->position.x, object->position.y, object->size.x, object->size.y, t, frames);
+        sprite->Draw(ctx, object->position.x, object->position.y, object->size.x, object->size.y, t, object->ticks);
     }
 }
 
@@ -61,7 +60,7 @@ void Renderer::DrawBoard(wxGraphicsContext* ctx, Transform& t) {
             }
 
             if(sprite != nullptr) {
-                sprite->Draw(ctx, col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE, t, frames);
+                sprite->Draw(ctx, col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE, t, 0);
             }
         }
     }

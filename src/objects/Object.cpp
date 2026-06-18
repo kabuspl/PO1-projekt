@@ -1,6 +1,7 @@
 #include "Object.h"
 
 void Object::Tick(std::set<char> pressedKeys) {
+    ticks++;
 }
 
 Object::Object(Vector position, Vector size, std::string spriteName, Board& board)

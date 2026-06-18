@@ -19,6 +19,7 @@ BombermanGame::BombermanGame(wxWindow* parent, Board& initialBoard)
 void BombermanGame::Tick() {
     for(size_t i = 0; i < board.objects.size(); i++) {
         board.objects[i]->Tick(pressedKeys);
+        board.objects[i]->ticks++;
     }
     for(auto iter = board.objects.begin(); iter != board.objects.end();) {
         if((*iter)->flagDelete) {

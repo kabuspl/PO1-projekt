@@ -7,12 +7,6 @@
 
 class Board;
 
-struct AnimationState {
-    int currentFrame = 0;
-    int frameCounter = 0;
-    int frameDuration = 0;
-};
-
 class Object {
 public:
     Vector position;
@@ -20,7 +14,7 @@ public:
     std::string spriteName;
     Board& board;
     bool flagDelete = false;
-    AnimationState animationState;
+    int ticks = 0;
 
     Object(Vector position, Vector size, std::string spriteName, Board& board);
 
