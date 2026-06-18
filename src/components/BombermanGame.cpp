@@ -64,9 +64,15 @@ void BombermanGame::Tick() {
 }
 
 void BombermanGame::OnDrawTimer(wxTimerEvent& event) {
-    if(pressedKeys.contains('P') && pause_delay <= 0) {
+    if(pressedKeys.contains(27) && pause_delay <= 0) {
         board.SetPause(!board.IsPaused());
-
+        board.showOverlay(wxT("Pauza"), "", wxT("Powrót do menu"), this->board.onMainMenu, wxT("Kontynuuj"),
+                          [this] {
+                              board.SetPause(false);
+                          });
+        if (board.IsPaused()==false) {
+            board.hideOverlay();
+        }
         pause_delay = 20;
     }
     if(!board.IsPaused()) Tick();
