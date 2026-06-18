@@ -3,9 +3,6 @@
 #include "Object.h"
 
 class Bomb : public Object {
-private:
-    int ticks = 0;
-
 public:
     bool isSolid = false;
     Bomb(Board& board, Vector position);

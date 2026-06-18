@@ -12,8 +12,6 @@ BombExplosion::BombExplosion(Board& board, Vector position)
 }
 
 void BombExplosion::Tick(std::set<char> pressedKeys) {
-    ticks++;
-
     if(ticks == 1) {
         int row = position.y / TILE_SIZE;
         int col = position.x / TILE_SIZE;

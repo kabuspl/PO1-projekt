@@ -12,8 +12,6 @@ Bomb::Bomb(Board& board, Vector position) : Object(position, Vector(TILE_SIZE, T
 }
 
 void Bomb::Tick(std::set<char> pressedKeys) {
-    ticks++;
-
     if(!isSolid) {
         bool playerInside = false;
         for(auto obj : board.objects) {
