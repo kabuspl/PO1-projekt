@@ -32,7 +32,7 @@ void Enemy::Tick(std::set<char> pressedKeys) {
     std::uniform_int_distribution<std::mt19937::result_type> rand(1, 500);
 
     std::vector<Object*> collidesWith;
-    board.CheckCollisions(*this, &collidesWith);
+    board.CheckCollisionsCircle(*this, &collidesWith);
     // if collision with player
     if(std::any_of(collidesWith.begin(), collidesWith.end(),
                    [](Object* obj) { return dynamic_cast<Player*>(obj) != nullptr; })) {

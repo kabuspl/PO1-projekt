@@ -1,5 +1,6 @@
 #include "Board.h"
 
+#include <cmath>
 #include <iostream>
 #include <list>
 #include <random>
@@ -7,6 +8,7 @@
 #include "Constants.h"
 #include "components/BombermanGame.h"
 #include "objects/Enemy.h"
+#include "objects/Object.h"
 #include "objects/Player.h"
 
 Board::Board(int width, int height) {
@@ -186,4 +188,25 @@ TileType Board::CheckCollisions(Object& object) {
 bool Board::CheckCollisionsSimple(Object& object) {
     std::vector<Object*> tmp;
     return CheckCollisions(object, &tmp) != TileType::Empty;
+}
+
+bool Board::CheckCollisionsCircle(Object& object, std::vector<Object*>* collidesWith) {
+    bool out = false;
+
+    for(auto object2 : objects) {
+        if(object2 == &object) continue;
+        Vector objectCenter = Vector(object.position.x + object.size.x / 2.0, object.position.y + object.size.y / 2.0);
+        double objectRadius = (object.size.x + object.size.y) / 4.0;
+        Vector object2Center =
+            Vector(object2->position.x + object2->size.x / 2.0, object2->position.y + object2->size.y / 2.0);
+        double object2Radius = (object2->size.x + object2->size.y) / 4.0;
+        double distance = sqrt(pow(object2Center.x - objectCenter.x, 2) + pow(object2Center.y - objectCenter.y, 2));
+
+        if(distance <= objectRadius + object2Radius) {
+            collidesWith->push_back(object2);
+            out = true;
+        }
+    }
+
+    return out;
 }

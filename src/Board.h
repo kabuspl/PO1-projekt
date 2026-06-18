@@ -39,6 +39,7 @@ public:
     TileType CheckCollisions(Object& object, std::vector<Object*>* collidesWith);
     TileType CheckCollisions(Object& object);
     bool CheckCollisionsSimple(Object& object);
+    bool CheckCollisionsCircle(Object& object, std::vector<Object*>* collidesWith);
 
 private:
     static std::mt19937 rng;
