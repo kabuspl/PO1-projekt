@@ -46,8 +46,8 @@ AboutPage::AboutPage(wxWindow* parent) : wxPanel(parent) {
 
     wxStaticText* author2Name = new wxStaticText(this, wxID_ANY, "Jakub Sakra");
     wxStaticText* author2Text = new wxStaticText(this, wxID_ANY,
-                                                 wxT("Lubię grać w gry komputerowe. Nie wiem co więcej tu o sobię "
-                                                     "napisać. Chodzę na Politechnikę Świętokszyską"),
+                                                 wxT("Lubię grać w gry komputerowe. Nie wiem co więcej tu o sobie "
+                                                     "napisać. Chodzę na Politechnikę Świętokrzyską"),
                                                  wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     author2Name->SetFont(GetFont().Scale(2.0));
     author2Text->Wrap(300);

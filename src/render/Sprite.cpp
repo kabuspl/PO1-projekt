@@ -4,7 +4,7 @@ Sprite::Sprite(std::string texture_path) {
     this->bitmap = wxBitmap(texture_path, wxBITMAP_TYPE_PNG);
 }
 
-// łądowanie sprite'a z pliku
+// ładowanie sprite'a z pliku
 Sprite::Sprite(std::string texture_path, wxColor accent) {
     auto tmpBitmap = wxBitmap(texture_path, wxBITMAP_TYPE_PNG);
     auto image = tmpBitmap.ConvertToImage();
