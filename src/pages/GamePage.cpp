@@ -48,7 +48,11 @@ GamePage::GamePage(wxWindow* parent) : wxPanel(parent), board(21, 11) {
     gamePanel->Bind(wxEVT_SIZE, &GamePage::OnParentSizeChanged, this);
 
     overlay = new wxPanel(this);
+#ifdef _WIN32
+    overlay->SetBackgroundColour(wxColor(80, 60, 60));
+#else
     overlay->SetBackgroundColour(wxColor(0, 0, 0, 128));
+#endif
     overlay->SetPosition(GetPosition());
     overlay->SetSize(GetSize());
     overlay->Raise();
@@ -91,22 +95,27 @@ void GamePage::ShowOverlay(wxString title, wxString description, wxString leftBu
     overlayRightButtonAction = rightButtonAction;
     overlay->Show();
     overlay->Layout();
+#ifdef _WIN32
+    gamePanel->Hide();
+    gamePanel->SetKeyUp(27);
+#endif
 }
 
 void GamePage::HideOverlay() {
     overlay->Hide();
+#ifdef _WIN32
+    gamePanel->Show();
+#endif
     gamePanel->SetFocusFromKbd();
 }
 
 void GamePage::OnOverlayLeftButtonPressed(wxCommandEvent& event) {
-    overlay->Hide();
-    gamePanel->SetFocusFromKbd();
+    HideOverlay();
     overlayLeftButtonAction();
 }
 
 void GamePage::OnOverlayRightButtonPressed(wxCommandEvent& event) {
-    overlay->Hide();
-    gamePanel->SetFocusFromKbd();
+    HideOverlay();
     overlayRightButtonAction();
 }
 
