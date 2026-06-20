@@ -1,6 +1,8 @@
 #include "GamePage.h"
 
 #include "../components/HudDisplay.h"
+#include <wx/colour.h>
+#include <wx/gdicmn.h>
 #include <wx/wx.h>
 
 wxDEFINE_EVENT(GAME_MENU, wxCommandEvent);
@@ -61,8 +63,10 @@ GamePage::GamePage(wxWindow* parent) : wxPanel(parent), board(21, 11) {
 
     overlayTitle = new wxStaticText(overlay, wxID_ANY, wxT("title"));
     overlayTitle->SetFont(GetFont().Scale(3.0));
+    overlayTitle->SetForegroundColour(wxColor(255, 255, 255));
     overlaySizer->Add(overlayTitle, 0, wxALIGN_CENTER);
     overlayDescription = new wxStaticText(overlay, wxID_ANY, wxT("desc"));
+    overlayDescription->SetForegroundColour(wxColor(255, 255, 255));
     overlaySizer->Add(overlayDescription, 0, wxALIGN_CENTER | wxBOTTOM, 15);
 
     wxGridSizer* overlayButtonSizer = new wxGridSizer(wxHORIZONTAL);

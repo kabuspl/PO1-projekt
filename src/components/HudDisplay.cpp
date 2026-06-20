@@ -9,10 +9,12 @@ HudDisplay::HudDisplay(wxWindow* parent, wxString label, wxString initialValue) 
 
     this->label = new wxStaticText(this, wxID_ANY, label);
     this->label->SetFont(hudFont);
+    this->label->SetForegroundColour(wxColor(255, 255, 255));
     sizer->Add(this->label, 0, wxALIGN_CENTER | wxTOP, 4);
 
     value = new wxStaticText(this, wxID_ANY, initialValue);
     value->SetFont(hudFont.Scale(2.0));
+    value->SetForegroundColour(wxColor(255, 255, 255));
     sizer->Add(value, 0, wxALIGN_CENTER);
 }
 
