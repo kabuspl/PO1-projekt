@@ -55,16 +55,7 @@ IF(WIN32)
     set_target_properties(projekt PROPERTIES WIN32_EXECUTABLE TRUE)
     add_custom_command(
         TARGET projekt POST_BUILD
-        COMMAND bash copydlls "$<TARGET_FILE:projekt>"
-    )
-    get_filename_component(CMAKE_BIN_DIR "${CMAKE_COMMAND}" DIRECTORY)
-    add_custom_command(
-        TARGET projekt POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E make_directory
-                "$<TARGET_FILE_DIR:projekt>/share/glib-2.0/schemas"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                "${CMAKE_BIN_DIR}/../share/glib-2.0/schemas/gschemas.compiled"
-                "$<TARGET_FILE_DIR:projekt>/share/glib-2.0/schemas/gschemas.compiled"
+        COMMAND bash ../copydlls "$<TARGET_FILE:projekt>"
     )
 ENDIF()
 

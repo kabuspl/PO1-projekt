@@ -5,15 +5,15 @@
 #include <vector>
 #include <wx/dcbuffer.h>
 #include <wx/graphics.h>
+#include <chrono>
 
 BombermanGame::BombermanGame(wxWindow* parent, Board& initialBoard)
     : wxPanel(parent), board(initialBoard), renderer(initialBoard) {
     Bind(wxEVT_PAINT, &BombermanGame::OnPaint, this);
     Bind(wxEVT_ERASE_BACKGROUND, [](wxEraseEvent&) {});
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    Bind(wxEVT_IDLE, &BombermanGame::OnIdle, this);
 
-    drawTimer.Bind(wxEVT_TIMER, &BombermanGame::OnDrawTimer, this);
-    drawTimer.Start(16); // ~60 FPS
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 // wydarzenia co każdą klatkę
@@ -68,23 +68,34 @@ void BombermanGame::Tick() {
     }
 }
 
-// wywoływane co 1/60 sekundy
-void BombermanGame::OnDrawTimer(wxTimerEvent& event) {
-    // obsługa ESC i ekranu pauzy
-    if(pressedKeys.contains(27) && pause_delay <= 0) {
-        board.SetPause(!board.IsPaused());
-        board.showOverlay(wxT("Pauza"), "", wxT("Powrót do menu"), this->board.onMainMenu, wxT("Kontynuuj"),
-                          [this] { board.SetPause(false); });
-        if(board.IsPaused() == false) {
-            board.hideOverlay();
+void BombermanGame::OnIdle(wxIdleEvent& event) {
+    static auto lastTime = std::chrono::high_resolution_clock::now();
+    auto now = std::chrono::high_resolution_clock::now();
+
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastTime).count();
+
+    if (elapsed >= 16) { // ~60 FPS
+        lastTime = now;
+        if(pressedKeys.contains(27) && pause_delay <= 0) {
+            board.SetPause(!board.IsPaused());
+            board.showOverlay(wxT("Pauza"), "", wxT("Powrót do menu"), this->board.onMainMenu, wxT("Kontynuuj"),
+                              [this] { board.SetPause(false); });
+            if(board.IsPaused() == false) {
+                board.hideOverlay();
+            }
+            pause_delay = 20;
         }
-        pause_delay = 20;
+        // aktualizacja stanu gry
+        if(!board.IsPaused()) Tick();
+        pause_delay--;
+        Refresh(false);
+    }else {
+#ifndef _WIN32
+        wxMilliSleep(1);
+#endif
     }
-    // aktualizacja stanu gry
-    if(!board.IsPaused()) Tick();
-    pause_delay--;
-    // wymuszenie odświeżenia ekranu
-    Refresh(false);
+
+    event.RequestMore();
 }
 
 void BombermanGame::OnPaint(wxPaintEvent& event) {

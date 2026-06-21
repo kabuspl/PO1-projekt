@@ -19,7 +19,6 @@ public:
     void ResetBoard();
 
 private:
-    wxTimer drawTimer;
     wxGraphicsFont fontWhite16;
     int frames_count = 0;
     int pause_delay = 0;
@@ -29,8 +28,8 @@ private:
     std::set<char> pressedKeys;
 
     void Tick();
-    void OnDrawTimer(wxTimerEvent& event);
     void OnPaint(wxPaintEvent& event);
+    void OnIdle(wxIdleEvent& event);
 
     void Setup(wxGraphicsContext* gc);
 };
